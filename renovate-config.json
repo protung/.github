@@ -1,0 +1,59 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "description": "Default configuration for repositories under `protung/`. Inspired from https://github.com/Ocramius/.github/blob/c77629415fd5a57ef23d9372075f406e7bf98403/renovate-config.json",
+  "extends": [
+    ":dependencyDashboard",
+    ":ignoreModulesAndTests",
+    ":automergeMinor",
+    ":rebaseStalePrs",
+    ":semanticCommitsDisabled",
+    ":separateMajorReleases",
+    ":combinePatchMinorReleases",
+    ":enableVulnerabilityAlerts",
+    ":timezone(UTC)",
+    ":label(Subject: Dependencies)",
+    "group:allNonMajor"
+  ],
+  "commitBodyTable": true,
+  "lockFileMaintenance": {
+    "enabled": false,
+    "extends": [
+      "schedule:daily"
+    ]
+  },
+  "platformAutomerge": true,
+  "prFooter": "[Renovate Bot](https://github.com/renovatebot/renovate)",
+  "rangeStrategy": "replace",
+  "rollbackPrs": true,
+  "automerge": false,
+  "automergeType": "pr-comment",
+  "packageRules": [
+    {
+      "matchDepTypes": ["dependencies", "require"],
+      "enabled": false
+    },
+    {
+      "matchDepTypes": ["devDependencies", "require-dev"],
+      "rangeStrategy": "bump"
+    },
+    {
+      "matchPackageNames": [
+        "php"
+      ],
+      "extends": [
+        ":automergeDisabled",
+        ":automergePr"
+      ],
+      "ignoreUnstable": false,
+      "groupName": "PHP"
+    }
+  ],
+  "vulnerabilityAlerts": {
+    "extends": [
+      ":automergeDisabled",
+      ":automergePr",
+      ":labels(Type: Security)"
+    ],
+    "rangeStrategy": "bump"
+  }
+}
